@@ -20,6 +20,8 @@ import sys
 import logging
 import time
 import getopt
+import glob
+import os
 
 # Custom MQTT message callback
 def customCallback(client, userdata, message):
@@ -140,7 +142,37 @@ time.sleep(2)
 
 # Publish to the same topic in a loop forever
 loopCount = 0
+path = "/home/pi/yizitian/messages"
+filesinpath = []
+iot_message = "test message"
+iot_topic = "sdkTest/sub"
+
 while True:
-	myAWSIoTMQTTClient.publish("sdk/test/Python", "New Message " + str(loopCount), 1)
-	loopCount += 1
+	# check path for files
+	print("Checking path: " + path + " for files.")
+	filesinpath = glob.glob(path + "/YIZITIAN_*")
+	print("Found files: " + ', '.join(filesinpath))
+	
+	# if file exists, read in file into string
+	if len(filesinpath) > 0:
+		file = open(filesinpath[0])
+		iot_message = file.read()
+		file.close()
+		
+		# publish string
+		print("Sending message to topic: ")
+		print(iot_topic)
+		print("\nMessage contents: ")
+		print(iot_message)
+		print("\n")
+		
+		myAWSIoTMQTTClient.publish(iot_topic, iot_message, 1)
+		
+		# move string to folder	
+		print("Renaming from:" + filesinpath[0])
+		lastdir_index = filesinpath[0].rfind('/',0)
+		newfilename = filesinpath[0][:lastdir_index] + '/sent' + filesinpath[0][lastdir_index:]
+		print("Renaming to: " + newfilename)
+		os.rename(filesinpath[0], newfilename)
+	
 	time.sleep(1)

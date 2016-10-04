@@ -1,0 +1,1 @@
+python basicPubSub.py -e "a3dflf7tn8z7e5.iot.us-west-2.amazonaws.com" -r "rootcert.txt" -c "5712609bcc-certificate.pem.crt" -k "5712609bcc-private.pem.key"

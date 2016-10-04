@@ -1,0 +1,27 @@
+Python AWS IoT
+
+
+python basicPubSub.py -e a3dflf7tn8z7e5.iot.us-west-2.amazonaws.com -r "W:\AWS IOT Certificates\RP\root-CA.crt" -c "W:\AWS IOT Certificates\RP\5712609bcc-certificate.pem.crt" -k "W:\AWS IOT Certificates\RP\5712609bcc-private.pem.key"
+
+python basicPubSub.py -e "a3dflf7tn8z7e5.iot.us-west-2.amazonaws.com" -r "rootcert.txt" -c "5712609bcc-certificate.pem.crt" -k "5712609bcc-private.pem.key"
+
+
+Run YIZITIAN SYSTEM:
+
+/home/pi/yizitian/startup
+
+Added to 
+/etc/profile
+of raspberry pi
+
+endpoint
+-e a3dflf7tn8z7e5.iot.us-west-2.amazonaws.com
+
+rootCAFilePath
+-r "W:\AWS IOT Certificates\RP\root-CA.crt"
+
+cerFilePath
+-c "W:\AWS IOT Certificates\RP\5712609bcc-certificate.pem.crt"
+
+privatekey
+-k "W:\AWS IOT Certificates\RP\5712609bcc-private.pem.key"
